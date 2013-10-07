@@ -1,0 +1,13 @@
+.DS_Store
+*.pyc
+*.pyo
+*.swp
+
+*.db
+
+virtualenv
+.codeintel
+*.sublime-project
+*.sublime-workspace
+
+/public
