@@ -28,10 +28,13 @@ class Application(tornado.web.Application):
         tornado.web.Application.__init__(self, handlers, **settings)
 
 
+def get_new_progress(progress, z):
+    return abs(float(progress) + z)
+
+
 class SocketHandler(tornado.websocket.WebSocketHandler):
     waiters = set()
     cache = []
-    cache_size = 200
 
     def allow_draft76(self):
         # for iOS 5.0 Safari
@@ -54,8 +57,11 @@ class SocketHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         logging.info("got message %r", message)
+        parsed = tornado.escape.json_decode(message)
         msg = {
-            "id": str(uuid.uuid4()),
+            #"id": str(uuid.uuid4()),
+            "id": parsed["id"],
+            "progress": get_new_progress(parsed["progress"], abs(parsed['z']))
         }
         SocketHandler.send_updates(msg)
 
