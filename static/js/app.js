@@ -14,7 +14,7 @@ $(document).ready(function() {
     updater.start();
     window.ondevicemotion = function(event) {
         if (event.accelerationIncludingGravity.z !== z) {
-            if (z - event.accelerationIncludingGravity.z > 10) {
+            if (z - event.accelerationIncludingGravity.z > 2) {
                 newMessage(
                     event.accelerationIncludingGravity.z,
                     id,

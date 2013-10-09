@@ -29,7 +29,7 @@ class Application(tornado.web.Application):
 
 
 def get_new_progress(progress, z):
-    return abs(float(progress) + z)
+    return abs(float(progress) + z/9)
 
 
 class SocketHandler(tornado.websocket.WebSocketHandler):
